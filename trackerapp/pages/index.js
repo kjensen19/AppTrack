@@ -1,8 +1,21 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import Date from '../component/date';
+import { getSortedJobsData } from '../lib/jobs';
+import Link from 'next/link';
 
-export default function Home() {
+
+export async function getStaticProps() {
+  const allJobsData = getSortedJobsData();
+  return {
+    props: {
+      allJobsData,
+    },
+  };
+}
+
+export default function Home({allJobsData}) {
   return (
     <div className={styles.container}>
       <Head>
@@ -52,6 +65,30 @@ export default function Home() {
             </p>
           </a>
         </div>
+        <h2>Projects</h2>
+        <div >
+          {allJobsData.map(({ id, date, title, img }) => (
+          <Link href={`/jobs/${id}`} key={id}>
+            <div >
+              
+                {title}
+              
+              <Image
+                priority
+                src={img}
+                height={144}
+                width={200}
+                alt=""
+               
+              />
+              <small>
+                <Date dateString={date} />
+              </small>
+            </div>
+          </Link>
+        
+          ))}
+          </div>
       </main>
 
       <footer className={styles.footer}>

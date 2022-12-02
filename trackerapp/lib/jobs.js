@@ -14,7 +14,7 @@ export function getSortedJobsData() {
     const id = fileName.replace(/\.md$/, '');
 
     // Read markdown file as string
-    const fullPath = path.join(postsDirectory, fileName);
+    const fullPath = path.join(jobsDirectory, fileName);
     const fileContents = fs.readFileSync(fullPath, 'utf8');
 
     // Use gray-matter to parse the post metadata section
