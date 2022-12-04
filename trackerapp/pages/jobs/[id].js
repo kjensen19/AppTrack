@@ -22,7 +22,7 @@ export default function Job({ jobData }) {
   }
 
 export async function getStaticProps({ params }) {
-  const jobData = await getJobData(params.id);
+  const jobData = await getJobsData(params.id);
   return {
     props: {
       jobData,
@@ -30,7 +30,7 @@ export async function getStaticProps({ params }) {
   };
 }
 export async function getStaticPaths() {
-  const paths = getAllJobIds();
+  const paths = getAllJobsIds();
   return {
     paths,
     fallback: false,
